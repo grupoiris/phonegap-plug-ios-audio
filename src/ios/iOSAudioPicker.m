@@ -142,7 +142,7 @@
         //                NSURL *audioURL = exportURL;
                         NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
 
-                        NSLog(@"AVAssetExportSessionStatusCompleted %@",audioURL);
+                        //NSLog(@"AVAssetExportSessionStatusCompleted %@",audioURL);
                         if(title != nil) {
                             [songInfo setObject:title forKey:@"title"];
                         } else {
@@ -180,7 +180,8 @@
                         [songsList addObject:songInfo];
 
                         //NSLog(@"Audio Data = %@",songsList);
-                        NSLog(@"Export Completed = %d out of Total Selected = %d",completed,selcount);
+                        //NSLog(@"Export Completed = %d out of Total Selected = %d",completed,selcount);
+						
                         if (completed == selcount) {
                             plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:songsList];
                             [self.commandDelegate sendPluginResult:plresult callbackId:callbackID];
