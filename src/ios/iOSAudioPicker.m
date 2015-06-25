@@ -128,7 +128,7 @@
         //
         //    [exporter exportAsynchronouslyWithCompletionHandler:^{
         //        int exportStatus = exporter.status;
-        //        completed++;
+				  completed++;
         //        switch (exportStatus) {
         //            case AVAssetExportSessionStatusFailed:{
         //                NSError *exportError = exporter.error;
