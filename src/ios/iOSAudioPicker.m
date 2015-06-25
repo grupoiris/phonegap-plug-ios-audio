@@ -104,14 +104,14 @@
             NSLog(@"songurl = %@",songurl);
 
 
-            AVURLAsset *songURL = [AVURLAsset URLAssetWithURL:songurl options:nil];
+        //    AVURLAsset *songURL = [AVURLAsset URLAssetWithURL:songurl options:nil];
 
-            NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        //    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
-            NSString *documentDir = [path objectAtIndex:0];
+        //    NSString *documentDir = [path objectAtIndex:0];
 
             //NSLog(@"Compatible Preset for selected Song = %@", [AVAssetExportSession exportPresetsCompatibleWithAsset:songURL]);
-
+		
         //    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:songURL presetName:AVAssetExportPresetAppleM4A];
         //
         //    exporter.outputFileType = @"com.apple.m4a-audio";
