@@ -112,34 +112,34 @@
 
             //NSLog(@"Compatible Preset for selected Song = %@", [AVAssetExportSession exportPresetsCompatibleWithAsset:songURL]);
 
-            AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:songURL presetName:AVAssetExportPresetAppleM4A];
-
-            exporter.outputFileType = @"com.apple.m4a-audio";
-
-            NSString *filename = [NSString stringWithFormat:@"%@.m4a",title];
-
-            NSString *outputfile = [documentDir stringByAppendingPathComponent:filename];
-
-            [self delSingleSong:outputfile];
-
-            NSURL *exportURL = [NSURL fileURLWithPath:outputfile];
-
-            exporter.outputURL  = exportURL;
-
-            [exporter exportAsynchronouslyWithCompletionHandler:^{
-                int exportStatus = exporter.status;
-                completed++;
-                switch (exportStatus) {
-                    case AVAssetExportSessionStatusFailed:{
-                        NSError *exportError = exporter.error;
-                        NSLog(@"AVAssetExportSessionStatusFailed = %@",exportError);
-                        NSString *errmsg = [exportError description];
-                        plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errmsg];
-                        break;
-                    }
-                    case AVAssetExportSessionStatusCompleted:{
-
-                        NSURL *audioURL = exportURL;
+        //    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:songURL presetName:AVAssetExportPresetAppleM4A];
+        //
+        //    exporter.outputFileType = @"com.apple.m4a-audio";
+        //
+        //    NSString *filename = [NSString stringWithFormat:@"%@.m4a",title];
+        //
+        //    NSString *outputfile = [documentDir stringByAppendingPathComponent:filename];
+        //
+        //    [self delSingleSong:outputfile];
+        //
+        //    NSURL *exportURL = [NSURL fileURLWithPath:outputfile];
+        //
+        //    exporter.outputURL  = exportURL;
+        //
+        //    [exporter exportAsynchronouslyWithCompletionHandler:^{
+        //        int exportStatus = exporter.status;
+        //        completed++;
+        //        switch (exportStatus) {
+        //            case AVAssetExportSessionStatusFailed:{
+        //                NSError *exportError = exporter.error;
+        //                NSLog(@"AVAssetExportSessionStatusFailed = %@",exportError);
+        //                NSString *errmsg = [exportError description];
+        //                plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errmsg];
+        //                break;
+        //            }
+        //            case AVAssetExportSessionStatusCompleted:{
+        //
+        //                NSURL *audioURL = exportURL;
                         NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
 
                         NSLog(@"AVAssetExportSessionStatusCompleted %@",audioURL);
@@ -160,6 +160,7 @@
                         }
 
                         [songInfo setObject:[songurl absoluteString] forKey:@"ipodurl"];
+						
                         if (artImageFound) {
                             [songInfo setObject:[imgData base64EncodedString] forKey:@"image"];
                         } else {
@@ -173,8 +174,8 @@
                           [songInfo setObject:@"No Genre" forKey:@"genre"];
                         }
 
-                        [songInfo setObject:[audioURL absoluteString] forKey:@"exportedurl"];
-                        [songInfo setObject:filename forKey:@"filename"];
+        //                [songInfo setObject:[audioURL absoluteString] forKey:@"exportedurl"];
+        //                [songInfo setObject:filename forKey:@"filename"];
 
                         [songsList addObject:songInfo];
 
@@ -184,35 +185,35 @@
                             plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:songsList];
                             [self.commandDelegate sendPluginResult:plresult callbackId:callbackID];
                         }
-                        break;
-                    }
-                    case AVAssetExportSessionStatusCancelled:{
-                        NSLog(@"AVAssetExportSessionStatusCancelled");
-                        plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cancelled"];
-                        break;
-                    }
-                    case AVAssetExportSessionStatusUnknown:{
-                        NSLog(@"AVAssetExportSessionStatusCancelled");
-                        plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unknown"];
-                        break;
-                    }
-                    case AVAssetExportSessionStatusWaiting:{
-                        NSLog(@"AVAssetExportSessionStatusWaiting");
-                        plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Waiting"];
-                        break;
-                    }
-                    case AVAssetExportSessionStatusExporting:{
-                        NSLog(@"AVAssetExportSessionStatusExporting");
-                        plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Exporting"];
-                        break;
-                    }
-
-                    default:{
-                        NSLog(@"Didnt get any status");
-                        break;
-                    }
-                }
-            }];
+        //                break;
+        //            }
+        //            case AVAssetExportSessionStatusCancelled:{
+        //                NSLog(@"AVAssetExportSessionStatusCancelled");
+        //                plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cancelled"];
+        //                break;
+        //            }
+        //            case AVAssetExportSessionStatusUnknown:{
+        //                NSLog(@"AVAssetExportSessionStatusCancelled");
+        //                plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unknown"];
+        //                break;
+        //            }
+        //            case AVAssetExportSessionStatusWaiting:{
+        //                NSLog(@"AVAssetExportSessionStatusWaiting");
+        //                plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Waiting"];
+        //                break;
+        //            }
+        //            case AVAssetExportSessionStatusExporting:{
+        //                NSLog(@"AVAssetExportSessionStatusExporting");
+        //                plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Exporting"];
+        //                break;
+        //            }
+        //
+        //            default:{
+        //                NSLog(@"Didnt get any status");
+        //                break;
+        //            }
+        //        }
+        //    }];
         }
 
     }
