@@ -10,21 +10,19 @@
     callbackID = command.callbackId;
     NSString *msong = [command argumentAtIndex:0];
     NSString *iCloudItems = [command argumentAtIndex:1];
-//	NSString *LangStr = [command argumentAtIndex:2];
+	NSString *LangStr = [command argumentAtIndex:2];
 
     MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAnyAudio];
 
     mediaPicker.delegate = self;
     mediaPicker.allowsPickingMultipleItems = [msong isEqualToString:@"true"];
     mediaPicker.showsCloudItems = [iCloudItems isEqualToString:@"true"];
-    mediaPicker.showsSelectionIndicator = YES;
 	
-
-	//if ( LangStr == "es" ){
-	//	mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Prompt in media item picker")
-	//}else{
-	//	mediaPicker.prompt = NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
-	//}
+	if ([LangStr isEqualToString:@"es"] ){
+		mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Elementos en libreria de Música")
+	}else{
+		mediaPicker.prompt = NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
+	}
 
     [self.viewController presentViewController:mediaPicker animated:YES completion:nil];
 
@@ -234,6 +232,18 @@
 
 //	self.navigationItem.prompt = @"This is the title";
 
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger)section {
+
+	MainViewController *mainViewController = (MainViewController *) self.delegate;
+	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
+	
+	NSMutableString* aString = [NSMutableString stringWithFormat:@"%d Items Selected", [currentQueue.items count]];    // does not need to be released. Needs to be retained if you need to keep use it after the current function.
+//	[aString appendFormat:@"... now has another int: %d", [currentQueue.items count]];
+	
+	self.navigationItem.prompt = aString;
+	
+	return [currentQueue.items count];
+}
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
 {
