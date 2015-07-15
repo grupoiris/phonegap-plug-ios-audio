@@ -228,26 +228,11 @@
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-//	self.navigationItem.prompt = @"This is the title";
-
-- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger)section {
-
-	MainViewController *mainViewController = (MainViewController *) self.delegate;
-	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
-	
-	NSMutableString* aString = [NSMutableString stringWithFormat:@"%d Items Selected", [currentQueue.items count]];    // does not need to be released. Needs to be retained if you need to keep use it after the current function.
-//	[aString appendFormat:@"... now has another int: %d", [currentQueue.items count]];
-	
-	self.navigationItem.prompt = aString;
-	
-	return [currentQueue.items count];
-}
-
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
 {
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
+
+//	self.navigationItem.prompt = @"This is the title";
 
 @end
