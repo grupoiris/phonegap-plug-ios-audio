@@ -10,7 +10,7 @@
     callbackID = command.callbackId;
     NSString *msong = [command argumentAtIndex:0];
     NSString *iCloudItems = [command argumentAtIndex:1];
-	NSString *LangStr = [command argumentAtIndex:2];
+//	NSString *LangStr = [command argumentAtIndex:2];
 
     MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAnyAudio];
 
@@ -20,11 +20,11 @@
     mediaPicker.showsSelectionIndicator = YES;
 	
 
-	if ( LangStr == "es" ){
-		mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Prompt in media item picker")
-	}else{
-		mediaPicker.prompt = NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
-	}
+	//if ( LangStr == "es" ){
+	//	mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Prompt in media item picker")
+	//}else{
+	//	mediaPicker.prompt = NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
+	//}
 
     [self.viewController presentViewController:mediaPicker animated:YES completion:nil];
 
