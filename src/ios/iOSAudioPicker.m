@@ -19,7 +19,7 @@
     mediaPicker.showsCloudItems = [iCloudItems isEqualToString:@"true"];
 	
 	if ([LangStr isEqualToString:@"es"] ){
-		mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Elementos en libreria de Música")
+		mediaPicker.prompt = NSLocalizedString (@"Seleccionar Elementos", "Elementos en libreria de Música");
 	}else{
 		mediaPicker.prompt = NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
 	}
