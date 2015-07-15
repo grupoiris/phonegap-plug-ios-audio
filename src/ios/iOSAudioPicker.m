@@ -10,7 +10,7 @@
     callbackID = command.callbackId;
     NSString *msong = [command argumentAtIndex:0];
     NSString *iCloudItems = [command argumentAtIndex:1];
-    NSString *LangStr = [command argumentAtIndex:2];
+//   NSString *LangStr = [command argumentAtIndex:2];
 
     MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAnyAudio];
 
