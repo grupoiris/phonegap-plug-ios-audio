@@ -1,9 +1,12 @@
 /********* iOSAudioPicker.m Cordova Plugin Implementation *******/
 
 #import "iOSAudioPicker.h"
+#import "MainViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @implementation iOSAudioPicker
+
+static NSString *kCellIdentifier = @"Cell";
 
 - (void) getAudio:(CDVInvokedUrlCommand *)command
 {
@@ -301,5 +304,6 @@
 
     [super dealloc];
 }
+
 
 @end
