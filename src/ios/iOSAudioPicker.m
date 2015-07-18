@@ -239,13 +239,21 @@ static int tot = 0;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	MPMediaPickerController *picker =
+		[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAnyAudio];
+	
 	tot = tot + 1;
-	self.navigationItem.prompt = [NSString stringWithFormat:@"%d items selected", tot];
+	picker.prompt = [NSString stringWithFormat:@"%d items selected", tot];
+	
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+	MPMediaPickerController *picker =
+		[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAnyAudio];
+	
 	tot = tot - 1;
-	self.navigationItem.prompt = [NSString stringWithFormat:@"%d items selected", tot];
+	picker.prompt = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
 @end
