@@ -1,12 +1,12 @@
 /********* iOSAudioPicker.m Cordova Plugin Implementation *******/
 
 #import "iOSAudioPicker.h"
-#import "MainViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @implementation iOSAudioPicker
 
 static NSString *kCellIdentifier = @"Cell";
+static int tot = 0;
 
 - (void) getAudio:(CDVInvokedUrlCommand *)command
 {
@@ -79,7 +79,9 @@ static NSString *kCellIdentifier = @"Cell";
 
 - (void) mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {
-
+    
+  //  self.navigationItem.prompt = mediaItemCollection.count;
+    
     if (mediaItemCollection) {
 
         songsList = [[NSMutableArray alloc] init];
@@ -236,74 +238,14 @@ static NSString *kCellIdentifier = @"Cell";
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-//	
-
-
-#pragma mark Table view methods________________________
-
-// To learn about using table views, see the TableViewSuite sample code  
-//		and Table View Programming Guide for iPhone OS.
-
-- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger)section {
-
-	MainViewController *mainViewController = (MainViewController *) self.delegate;
-	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
-    self.navigationItem.prompt = [currentQueue.items count];
-	return [currentQueue.items count];
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	tot = tot + 1;
+	self.navigationItem.prompt = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
-- (UITableViewCell *) tableView: (UITableView *) tableView cellForRowAtIndexPath: (NSIndexPath *) indexPath {
-
-	NSInteger row = [indexPath row];
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: kCellIdentifier];
-	
-	if (cell == nil) {
-	
-		cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero 
-									   reuseIdentifier: kCellIdentifier] autorelease];
-	}
-	
-	MainViewController *mainViewController = (MainViewController *) self.delegate;
-	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
-	MPMediaItem *anItem = (MPMediaItem *)[currentQueue.items objectAtIndex: row];
-	
-	if (anItem) {
-		cell.textLabel.text = [anItem valueForProperty:MPMediaItemPropertyTitle];
-	}
-
-	[tableView deselectRowAtIndexPath: indexPath animated: YES];
-	
-	return cell;
+- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+	tot = tot - 1;
+	self.navigationItem.prompt = [NSString stringWithFormat:@"%d items selected", tot];
 }
-
-//	 To conform to the Human Interface Guidelines, selections should not be persistent --
-//	 deselect the row after it has been selected.
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-
-	[tableView deselectRowAtIndexPath: indexPath animated: YES];
-}
-
-#pragma mark Application state management_____________
-// Standard methods for managing application state.
-- (void)didReceiveMemoryWarning {
-
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-
-    [super dealloc];
-}
-
 
 @end
