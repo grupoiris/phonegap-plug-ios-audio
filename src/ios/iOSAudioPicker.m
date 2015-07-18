@@ -233,6 +233,73 @@
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-//	self.navigationItem.prompt = @"This is the title";
+//	
+
+
+#pragma mark Table view methods________________________
+
+// To learn about using table views, see the TableViewSuite sample code  
+//		and Table View Programming Guide for iPhone OS.
+
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger)section {
+
+	MainViewController *mainViewController = (MainViewController *) self.delegate;
+	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
+    self.navigationItem.prompt = [currentQueue.items count];
+	return [currentQueue.items count];
+}
+
+- (UITableViewCell *) tableView: (UITableView *) tableView cellForRowAtIndexPath: (NSIndexPath *) indexPath {
+
+	NSInteger row = [indexPath row];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: kCellIdentifier];
+	
+	if (cell == nil) {
+	
+		cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero 
+									   reuseIdentifier: kCellIdentifier] autorelease];
+	}
+	
+	MainViewController *mainViewController = (MainViewController *) self.delegate;
+	MPMediaItemCollection *currentQueue = mainViewController.userMediaItemCollection;
+	MPMediaItem *anItem = (MPMediaItem *)[currentQueue.items objectAtIndex: row];
+	
+	if (anItem) {
+		cell.textLabel.text = [anItem valueForProperty:MPMediaItemPropertyTitle];
+	}
+
+	[tableView deselectRowAtIndexPath: indexPath animated: YES];
+	
+	return cell;
+}
+
+//	 To conform to the Human Interface Guidelines, selections should not be persistent --
+//	 deselect the row after it has been selected.
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
+
+	[tableView deselectRowAtIndexPath: indexPath animated: YES];
+}
+
+#pragma mark Application state management_____________
+// Standard methods for managing application state.
+- (void)didReceiveMemoryWarning {
+
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+}
+
+
+- (void)dealloc {
+
+    [super dealloc];
+}
 
 @end
