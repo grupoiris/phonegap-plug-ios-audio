@@ -240,12 +240,12 @@ static int tot = 0;
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{	
 	tot = tot + 1;	
-	self.title = [NSString stringWithFormat:@"%d items selected", tot];
+	self.navigationItem.title = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
 	tot = tot - 1;
-	self.title = [NSString stringWithFormat:@"%d items selected", tot];
+	self.navigationItem.title = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
 @end
