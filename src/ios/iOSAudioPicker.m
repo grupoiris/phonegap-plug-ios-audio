@@ -238,22 +238,14 @@ static int tot = 0;
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	MPMediaPickerController *picker =
-		[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAnyAudio];
-	
-	tot = tot + 1;
-	picker.prompt = [NSString stringWithFormat:@"%d items selected", tot];
-	
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{	
+	tot = tot + 1;	
+	self.title = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-	MPMediaPickerController *picker =
-		[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAnyAudio];
-	
 	tot = tot - 1;
-	picker.prompt = [NSString stringWithFormat:@"%d items selected", tot];
+	self.title = [NSString stringWithFormat:@"%d items selected", tot];
 }
 
 @end
